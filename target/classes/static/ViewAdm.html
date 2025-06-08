@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Gaming Platform</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/adm-styles.css">
+    
+    <!-- Estilos específicos del botón de logout -->
+    <style>
+        .logout-btn {
+            background: linear-gradient(45deg, var(--rojo-alerta), #cc0033);
+            border: 2px solid var(--rojo-alerta);
+            color: var(--blanco-electrico);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 0, 64, 0.3);
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(45deg, #cc0033, var(--rojo-alerta));
+            box-shadow: 0 0 25px rgba(255, 0, 64, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .logout-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 0 10px rgba(255, 0, 64, 0.4);
+        }
+
+        .logout-icon {
+            font-size: 1.1rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Estilos para notificaciones */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 350px;
+            padding: 1rem;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification.error {
+            background: linear-gradient(45deg, var(--rojo-alerta), #cc0033);
+        }
+
+        .notification.success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilos para indicador de carga */
+        .loading-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--azul-neon);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 10001;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid var(--azul-neon);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fondo animado -->
+    <div class="admin-background"></div>
+
+    <!-- Header del Admin -->
+    <header class="admin-header">
+        <div class="header-container">
+            <div class="admin-logo">
+                <h1>🎮 ADMIN PANEL</h1>
+                <span class="admin-badge">Administrator</span>
+            </div>
+            <div class="admin-actions">
+                <div class="stats-quick">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalGames">-</div>
+                        <div class="stat-label">Total Games</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="activeGames">-</div>
+                        <div class="stat-label">Active</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="inactiveGames">-</div>
+                        <div class="stat-label">Inactive</div>
+                    </div>
+                </div>
+                <!-- Botón de cerrar sesión -->
+                <button class="logout-btn" onclick="cerrarSesion()">
+                    <span class="logout-icon">🚪</span>
+                    CERRAR SESIÓN
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor principal -->
+    <main class="admin-container">
+        <!-- Panel de control -->
+        <div class="control-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">🎯 Game Management</h2>
+                <button class="add-game-btn" onclick="abrirModalAgregar()">
+                    <span class="add-icon">➕</span>
+                    Add New Game
+                </button>
+            </div>
+
+            <!-- Filtros y búsqueda -->
+            <div class="filter-section">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput"
+                        placeholder="🔍 Buscar videojuegos por título o género...">
+                </div>
+                <select class="filter-select" id="genreFilter">
+                    <option value="">Todos los Géneros</option>
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Shooter">Shooter</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Puzzle">Puzzle</option>
+                    <option value="Platform">Platform</option>
+                </select>
+                <select class="filter-select" id="statusFilter">
+                    <option value="">Todos los Estados</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Grid de juegos -->
+        <div class="games-admin-grid" id="gamesGrid">
+            <!-- Indicador de carga inicial -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--azul-neon);">
+                <div class="loading-spinner"></div>
+                <h3>Cargando videojuegos...</h3>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para agregar/editar juego -->
+    <div class="modal" id="gameModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Agregar Nuevo Videojuego</h3>
+                <button class="close-btn" onclick="cerrarModal()">&times;</button>
+            </div>
+            <form id="gameForm">
+                <div class="form-group">
+                    <label class="form-label">Título del Videojuego *</label>
+                    <input type="text" class="form-input" id="gameTitle" 
+                           placeholder="Ingrese el título del videojuego" required maxlength="100">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Género *</label>
+                    <select class="form-input" id="gameGenre" required>
+                        <option value="">Seleccionar Género</option>
+                        <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="RPG">RPG</option>
+                        <option value="Strategy">Strategy</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Racing">Racing</option>
+                        <option value="Shooter">Shooter</option>
+                        <option value="Simulation">Simulation</option>
+                        <option value="Puzzle">Puzzle</option>
+                        <option value="Platform">Platform</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Fecha de Lanzamiento</label>
+                    <input type="date" class="form-input" id="gameDate">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Imagen/Emoji</label>
+                    <input type="text" class="form-input" id="gameIcon" 
+                           placeholder="🎮 Emoji o URL de imagen" maxlength="255">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Enlace del Videojuego</label>
+                    <input type="url" class="form-input" id="gameLink" 
+                           placeholder="https://ejemplo.com/juego" maxlength="255">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Estado *</label>
+                    <select class="form-input" id="gameStatus" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="submitBtn">Guardar Videojuego</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/videojuegos-api.js"></script>
+</body>
+
+</html>
