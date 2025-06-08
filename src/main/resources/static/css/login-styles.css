@@ -1,0 +1,1191 @@
+/* LOGIN STYLES - DOWN TO THE TOP Gaming Portal */
+
+/* Variables heredadas del diseño principal */
+:root {
+    --negro-profundo: #0A0F1C;
+    --azul-oscuro: #1A1F3A;
+    --cian-electrico: #00D4FF;
+    --purpura-intenso: #6B46C1;
+    --verde-matrix: #00FF88;
+    --oro-premium: #FFB800;
+    --rojo-plasma: #FF073A;
+    --blanco-cristal: #F8FAFC;
+    --gris-metalico: #8B8B8B;
+    --gradiente-principal: linear-gradient(135deg, #0A0F1C 0%, #1A1F3A 35%, #2D1B69 100%);
+    --gradiente-card: linear-gradient(145deg, #1A1F3A 0%, #0A0F1C 100%);
+    --sombra-neon: 0 0 30px rgba(0, 212, 255, 0.4);
+    --sombra-hover: 0 20px 60px rgba(107, 70, 193, 0.3);
+    --glassmorphism: rgba(26, 31, 58, 0.25);
+}
+
+/* Reset y base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+}
+
+body {
+    background: var(--gradiente-principal);
+    color: var(--blanco-cristal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Fondo animado */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: var(--gradiente-principal);
+    overflow: hidden;
+}
+
+.animated-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(107, 70, 193, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+    animation: backgroundFlow 12s ease-in-out infinite;
+}
+
+@keyframes backgroundFlow {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+
+    33% {
+        opacity: 0.8;
+        transform: scale(1.1) rotate(1deg);
+    }
+
+    66% {
+        opacity: 0.9;
+        transform: scale(0.95) rotate(-1deg);
+    }
+}
+
+/* Partículas flotantes */
+.game-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0.1;
+    animation: floatParticle 15s infinite linear;
+    filter: blur(0.5px);
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    left: 20%;
+    animation-delay: -2s;
+}
+
+.particle:nth-child(3) {
+    left: 30%;
+    animation-delay: -4s;
+}
+
+.particle:nth-child(4) {
+    left: 40%;
+    animation-delay: -6s;
+}
+
+.particle:nth-child(5) {
+    left: 60%;
+    animation-delay: -8s;
+}
+
+.particle:nth-child(6) {
+    left: 70%;
+    animation-delay: -10s;
+}
+
+.particle:nth-child(7) {
+    left: 80%;
+    animation-delay: -12s;
+}
+
+.particle:nth-child(8) {
+    left: 90%;
+    animation-delay: -14s;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) translateX(0px) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.1;
+    }
+
+    90% {
+        opacity: 0.1;
+    }
+
+    100% {
+        transform: translateY(-100px) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-particle {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.15;
+    animation: particleFloat 4s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.15;
+    }
+
+    50% {
+        opacity: 0.3;
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Contenedor principal del login */
+.login-container {
+    background: var(--glassmorphism);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.login-container.animate-in {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    animation: containerGlow 6s ease-in-out infinite;
+}
+
+@keyframes containerGlow {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: -100%;
+    }
+}
+
+/* Header del login */
+.login-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-container {
+    position: relative;
+}
+
+.logo-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: logoFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px var(--cian-electrico));
+}
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.05);
+    }
+}
+
+.brand-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, var(--cian-electrico), var(--verde-matrix), var(--oro-premium));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleShimmer 4s ease-in-out infinite;
+    text-shadow: 0 0 30px var(--cian-electrico);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+@keyframes titleShimmer {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.logo-subtitle {
+    color: var(--gris-metalico);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Form header */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--cian-electrico);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px var(--cian-electrico);
+    letter-spacing: 1px;
+}
+
+.neon-divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--cian-electrico), transparent);
+    margin: 0 auto 1rem;
+    box-shadow: 0 0 15px var(--cian-electrico);
+    animation: dividerPulse 3s ease-in-out infinite;
+}
+
+@keyframes dividerPulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scaleX(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1.2);
+    }
+}
+
+.form-subtitle {
+    color: var(--gris-metalico);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* Formulario */
+.login-form {
+    position: relative;
+    z-index: 1;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--gris-metalico);
+    font-size: 1.1rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.input-container.focused .input-icon {
+    color: var(--cian-electrico);
+    transform: scale(1.1);
+}
+
+.input-container input {
+    width: 100%;
+    padding: 1.2rem 1rem 1.2rem 3rem;
+    background: rgba(26, 31, 58, 0.4);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    color: var(--blanco-cristal);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.input-container input:focus {
+    border-color: var(--cian-electrico);
+    box-shadow:
+        0 0 0 3px rgba(0, 212, 255, 0.2),
+        0 0 20px rgba(0, 212, 255, 0.3);
+    background: rgba(26, 31, 58, 0.6);
+}
+
+.floating-label {
+    position: absolute;
+    left: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gris-metalico);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: rgba(26, 31, 58, 0.8);
+    padding: 0 0.5rem;
+    border-radius: 4px;
+}
+
+.input-container.focused .floating-label,
+.input-container input:focus+.floating-label {
+    top: 0;
+    left: 1rem;
+    font-size: 0.8rem;
+    color: var(--cian-electrico);
+    font-weight: 600;
+}
+
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cian-electrico), var(--verde-matrix));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.input-container.focused .input-border,
+.input-container input:focus~.input-border {
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--gris-metalico);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.password-toggle:hover {
+    color: var(--cian-electrico);
+    transform: scale(1.1);
+}
+
+/* Opciones del formulario */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.checkbox-container input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gris-metalico);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    background: rgba(26, 31, 58, 0.4);
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid var(--cian-electrico);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.2s ease;
+}
+
+.checkbox-container input:checked+.checkbox-label .checkmark {
+    background: var(--cian-electrico);
+    border-color: var(--cian-electrico);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
+.checkbox-container input:checked+.checkbox-label .checkmark::after {
+    transform: rotate(45deg) scale(1);
+}
+
+.checkbox-container input:checked+.checkbox-label {
+    color: var(--cian-electrico);
+}
+
+.forgot-password {
+    color: var(--gris-metalico);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.forgot-password::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--cian-electrico);
+    transition: width 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: var(--cian-electrico);
+}
+
+.forgot-password:hover::after {
+    width: 100%;
+}
+
+/* Botón de login */
+.login-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(45deg, var(--rojo-plasma), var(--oro-premium));
+    border: none;
+    border-radius: 12px;
+    color: var(--blanco-cristal);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 8px 25px rgba(255, 7, 58, 0.3);
+}
+
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.login-btn:hover::before {
+    left: 100%;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        0 15px 35px rgba(255, 7, 58, 0.5),
+        0 0 50px rgba(255, 184, 0, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.login-btn:hover .btn-glow {
+    opacity: 1;
+}
+
+/* Separador */
+.separator {
+    position: relative;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+}
+
+.separator-text {
+    background: var(--gradiente-card);
+    padding: 0 1rem;
+    color: var(--gris-metalico);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Login social */
+.social-login {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 0.8rem;
+    background: rgba(26, 31, 58, 0.4);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 10px;
+    color: var(--blanco-cristal);
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--cian-electrico);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+.social-btn.google:hover {
+    background: linear-gradient(45deg, #EA4335, #FBBC05);
+}
+
+.social-btn.discord:hover {
+    background: linear-gradient(45deg, #5865F2, #7289DA);
+}
+
+.social-btn.steam:hover {
+    background: linear-gradient(45deg, #171A21, #2A475E);
+}
+
+/* Sección de registro */
+.register-section {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.register-text {
+    color: var(--gris-metalico);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.register-link {
+    color: var(--cian-electrico);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.register-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cian-electrico), var(--verde-matrix));
+    transition: width 0.3s ease;
+}
+
+.register-link:hover {
+    color: var(--verde-matrix);
+    text-shadow: 0 0 10px var(--verde-matrix);
+}
+
+.register-link:hover::after {
+    width: 100%;
+}
+
+/* Estados de carga */
+.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.loading .login-btn {
+    background: var(--gris-metalico);
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid var(--blanco-cristal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Alertas y mensajes */
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.alert.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert.error {
+    background: rgba(255, 7, 58, 0.2);
+    border: 1px solid var(--rojo-plasma);
+    color: var(--rojo-plasma);
+    box-shadow: 0 0 15px rgba(255, 7, 58, 0.3);
+}
+
+.alert.success {
+    background: rgba(0, 255, 136, 0.2);
+    border: 1px solid var(--verde-matrix);
+    color: var(--verde-matrix);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+/* Efectos visuales adicionales */
+.glow-effect {
+    position: relative;
+}
+
+.glow-effect::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--cian-electrico), var(--verde-matrix), var(--oro-premium), var(--rojo-plasma));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: glowRotate 4s linear infinite;
+}
+
+.glow-effect:hover::before {
+    opacity: 0.7;
+}
+
+@keyframes glowRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-container {
+        max-width: 95%;
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+
+    .brand-title {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .form-title {
+        font-size: 1rem;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .social-login {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .particle {
+        font-size: 1.2rem;
+    }
+
+    .floating-particle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .brand-title {
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+    }
+
+    .logo-icon {
+        font-size: 2.5rem;
+    }
+
+    .input-container input {
+        padding: 1rem 0.8rem 1rem 2.5rem;
+        font-size: 0.9rem;
+    }
+
+    .floating-label {
+        left: 2.5rem;
+        font-size: 0.9rem;
+    }
+
+    .input-container.focused .floating-label,
+    .input-container input:focus+.floating-label {
+        font-size: 0.75rem;
+    }
+
+    .login-btn {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animaciones de entrada para elementos */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Clases de utilidad para animaciones */
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-left {
+    animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fade-in-right {
+    animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+.animate-delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* Efectos de hover para mejorar la experiencia */
+.interactive-element {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.interactive-element:hover {
+    transform: translateY(-2px);
+}
+
+/* Overlay de carga */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 15, 28, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--blanco-cristal);
+}
+
+.loading-content .spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+}
+
+.loading-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cian-electrico);
+    text-shadow: 0 0 10px var(--cian-electrico);
+}
+
+        /* Estilos para el botón de regreso */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: white;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            z-index: 1000;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #ff5722, #d32f2f);
+            border-color: #ff6b6b;
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+        }
+
+        .back-button i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* Estilos para enlaces del formulario */
+        .forgot-password {
+            color: #64b5f6 !important;
+            text-decoration: none !important;
+            font-family: 'Orbitron', monospace !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+        }
+
+        .forgot-password:hover {
+            color: #42a5f5 !important;
+            text-shadow: 0 0 8px rgba(100, 181, 246, 0.6) !important;
+        }
+
+        .forgot-password::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #64b5f6, #42a5f5);
+            transition: width 0.3s ease;
+        }
+
+        .forgot-password:hover::after {
+            width: 100%;
+        }
+
+        /* Botón de crear cuenta */
+        .register-btn {
+            background: linear-gradient(135deg, #42a5f5, #2f88d1) !important;
+            border: 2px solid transparent !important;
+            border-radius: 8px !important;
+            padding: 10px 20px !important;
+            color: white !important;
+            text-decoration: none !important;
+            font-family: 'Orbitron', monospace !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3) !important;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4) !important;
+            background: linear-gradient(135deg, #052742, #2f88d1) !important;
+            border-color:  #42a5f5, !important;
+        }
+
+        .register-btn i {
+            font-size: 14px !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .register-btn:hover i {
+            transform: scale(1.1) !important;
+        }
+
+        /* Enlaces del footer */
+        .footer-link {
+            color: #90a4ae !important;
+            text-decoration: none !important;
+            font-family: 'Orbitron', monospace !important;
+            font-size: 12px !important;
+            font-weight: 400 !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            padding: 5px 0 !important;
+        }
+
+        .footer-link:hover {
+            color: #fff !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+        }
+
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 2px;
+            left: 50%;
+            background: #90a4ae;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .footer-link:hover::before {
+            width: 100%;
+            background: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+            
+            .register-btn {
+                padding: 8px 16px !important;
+                font-size: 12px !important;
+            }
+            
+            .footer-link {
+                font-size: 11px !important;
+            }
+        }
+   

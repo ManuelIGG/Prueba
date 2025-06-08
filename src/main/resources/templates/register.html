@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - DOWN TO THE TOP Gaming Portal</title>
+    <link rel="stylesheet" href="/css/register-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+        <!-- Fondo animado -->
+        <div class="animated-background"></div>
+    
+    <!-- Partículas flotantes -->
+    <div class="game-particles">
+        <div class="particle">🎮</div>
+        <div class="particle">⚡</div>
+        <div class="particle">🎯</div>
+        <div class="particle">🔥</div>
+        <div class="particle">💎</div>
+        <div class="particle">🚀</div>
+        <div class="particle">⭐</div>
+        <div class="particle">🎲</div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="register-container" id="registerContainer">
+        <!-- Header -->
+        <div class="register-header animate-fade-in-up">
+            <div class="logo-container">
+                <div class="logo-icon">🎮</div>
+                <h1 class="brand-title">DOWN TO THE TOP</h1>
+                <p class="logo-subtitle">Gaming Portal</p>
+            </div>
+        </div>
+
+        <!-- Form Header -->
+        <div class="form-header animate-fade-in-up animate-delay-1">
+            <h2 class="form-title">ÚNETE AL JUEGO</h2>
+            <div class="neon-divider"></div>
+            <p class="form-subtitle">Crea tu cuenta de gamer</p>
+        </div>
+
+        <!-- Alerts -->
+        <div id="alertContainer"></div>
+
+        <!-- Formulario -->
+        <form class="register-form" id="registerForm">
+            <!-- Email -->
+            <div class="input-group animate-fade-in-left animate-delay-2">
+                <div class="input-container">
+                    <i class="input-icon fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" required>
+                    <label class="floating-label" for="email">Correo Electrónico</label>
+                    <div class="input-border"></div>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="input-group animate-fade-in-right animate-delay-3">
+                <div class="input-container">
+                    <i class="input-icon fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required>
+                    <label class="floating-label" for="password">Contraseña</label>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <div class="input-border"></div>
+                </div>
+                <div class="password-strength" id="passwordStrength">
+                    <div class="strength-bar">
+                        <div class="strength-fill"></div>
+                    </div>
+                    <span class="strength-text">Seguridad de contraseña</span>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="input-group animate-fade-in-left animate-delay-4">
+                <div class="input-container">
+                    <i class="input-icon fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <label class="floating-label" for="confirmPassword">Confirmar Contraseña</label>
+                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <div class="input-border"></div>
+                </div>
+            </div>
+
+            <!-- Rol -->
+            <div class="input-group animate-fade-in-right animate-delay-5">
+                <div class="select-container">
+                    <i class="input-icon fas fa-user-tag"></i>
+                    <select id="rol" name="rol" required>
+                        <option value="">Selecciona tu rol</option>
+                        <option value="usuario">🎮 Usuario</option>
+                        <option value="admin">⚡ Admin</option>
+                    </select>
+                    <label class="floating-label" for="rol">Tipo de Usuario</label>
+                    <div class="select-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="input-border"></div>
+                </div>
+            </div>
+
+            <!-- Términos y condiciones -->
+            <div class="form-options animate-fade-in-up animate-delay-6">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label class="checkbox-label" for="terms">
+                        <div class="checkmark"></div>
+                        <span>Acepto los <a href="#" class="terms-link">términos y condiciones</a></span>
+                    </label>
+                </div>
+                
+                <div class="checkbox-container">
+                    <input type="checkbox" id="newsletter" name="newsletter">
+                    <label class="checkbox-label" for="newsletter">
+                        <div class="checkmark"></div>
+                        <span>Recibir noticias gaming</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botón de registro -->
+            <button type="submit" class="register-btn interactive-element animate-fade-in-up animate-delay-7">
+                <i class="fas fa-rocket"></i>
+                <span>CREAR CUENTA</span>
+                <div class="btn-glow"></div>
+            </button>
+        </form>
+
+        <!-- Separador -->
+        <div class="separator animate-fade-in-up animate-delay-8">
+            <div class="separator-text">O REGÍSTRATE CON</div>
+        </div>
+
+        <!-- Social Register -->
+        <div class="social-login animate-fade-in-up animate-delay-9">
+            <button class="social-btn google interactive-element">
+                <i class="fab fa-google"></i>
+                <span>Google</span>
+            </button>
+            <button class="social-btn discord interactive-element">
+                <i class="fab fa-discord"></i>
+                <span>Discord</span>
+            </button>
+            <button class="social-btn steam interactive-element">
+                <i class="fab fa-steam"></i>
+                <span>Steam</span>
+            </button>
+        </div>
+
+        <!-- Login link -->
+        <div class="login-section animate-fade-in-up animate-delay-10">
+            <p class="login-text">¿Ya tienes cuenta? <a href="index.html" class="login-link">Inicia Sesión</a></p>
+        </div>
+    </div>
+
+    <!-- Overlay de carga -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <div class="loading-text">Creando tu cuenta...</div>
+        </div>
+    </div>
+
+    <!-- Partículas dinámicas -->
+    <div class="floating-particles" id="floatingParticles"></div>
+
+    <script>
+        // Configuración de la API
+        const apiUsuarios = "http://localhost:8113/api/usuarios";
+
+        // Animación de entrada del contenedor
+        window.addEventListener('load', () => {
+            document.getElementById('registerContainer').classList.add('animate-in');
+        });
+
+        // Manejo de focus en inputs
+        document.querySelectorAll('.input-container input, .select-container select').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.closest('.input-container, .select-container').classList.add('focused');
+            });
+
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.closest('.input-container, .select-container').classList.remove('focused');
+                }
+            });
+
+            input.addEventListener('input', () => {
+                if (input.value) {
+                    input.closest('.input-container, .select-container').classList.add('focused');
+                }
+            });
+        });
+
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.nextElementSibling.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            updatePasswordStrength(strength);
+        });
+
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score += 25;
+            if (password.match(/[a-z]/)) score += 25;
+            if (password.match(/[A-Z]/)) score += 25;
+            if (password.match(/[0-9]/)) score += 15;
+            if (password.match(/[^a-zA-Z0-9]/)) score += 10;
+            return Math.min(score, 100);
+        }
+
+        function updatePasswordStrength(strength) {
+            const fill = document.querySelector('.strength-fill');
+            const text = document.querySelector('.strength-text');
+            
+            fill.style.width = strength + '%';
+            
+            if (strength < 25) {
+                fill.style.background = 'var(--rojo-plasma)';
+                text.textContent = 'Muy débil';
+                text.style.color = 'var(--rojo-plasma)';
+            } else if (strength < 50) {
+                fill.style.background = 'var(--oro-premium)';
+                text.textContent = 'Débil';
+                text.style.color = 'var(--oro-premium)';
+            } else if (strength < 75) {
+                fill.style.background = 'var(--cian-electrico)';
+                text.textContent = 'Buena';
+                text.style.color = 'var(--cian-electrico)';
+            } else {
+                fill.style.background = 'var(--verde-matrix)';
+                text.textContent = 'Muy fuerte';
+                text.style.color = 'var(--verde-matrix)';
+            }
+        }
+
+        // Función para validar email
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // Función para verificar si el email ya existe
+        async function verificarEmailExistente(email) {
+            try {
+                const response = await fetch(apiUsuarios);
+                if (!response.ok) {
+                    throw new Error(`Error del servidor: ${response.status}`);
+                }
+                const usuarios = await response.json();
+                return usuarios.some(usuario => usuario.email === email);
+            } catch (error) {
+                console.error('Error al verificar email:', error);
+                return false;
+            }
+        }
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('email').trim();
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            const rol = formData.get('rol');
+
+            // Validaciones del lado cliente
+            if (!validarEmail(email)) {
+                showAlert('Por favor ingrese un email válido', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('La contraseña debe tener al menos 6 caracteres', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showAlert('Las contraseñas no coinciden', 'error');
+                return;
+            }
+
+            if (!rol) {
+                showAlert('Por favor selecciona un tipo de usuario', 'error');
+                return;
+            }
+
+            if (!document.getElementById('terms').checked) {
+                showAlert('Debes aceptar los términos y condiciones', 'error');
+                return;
+            }
+
+            // Mostrar loading
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            try {
+                // Verificar si el email ya existe
+                const emailExiste = await verificarEmailExistente(email);
+                if (emailExiste) {
+                    document.getElementById('loadingOverlay').classList.remove('active');
+                    showAlert('Este email ya está registrado. Usa otro email o inicia sesión.', 'error');
+                    return;
+                }
+
+                // Crear objeto usuario según la estructura de la BD
+                const nuevoUsuario = {
+                    email: email,
+                    password: password,
+                    rol: rol,
+                    estado: 'activo' // Por defecto se crea activo
+                };
+
+                // Enviar petición POST a la API
+                const response = await fetch(apiUsuarios, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(nuevoUsuario)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error del servidor: ${response.status}`);
+                }
+
+                const resultado = await response.json();
+                
+                // Ocultar loading
+                document.getElementById('loadingOverlay').classList.remove('active');
+                
+                // Mostrar mensaje de éxito
+                showAlert('¡Cuenta creada exitosamente! Bienvenido al gaming portal', 'success');
+                
+                // Crear partículas de celebración
+                createCelebrationParticles();
+                
+                // Limpiar formulario
+                document.getElementById('registerForm').reset();
+                
+                // Redirigir al login después de 3 segundos
+                setTimeout(() => {
+                    window.location.href = 'index';
+                }, 3000);
+
+            } catch (error) {
+                console.error('Error en el registro:', error);
+                document.getElementById('loadingOverlay').classList.remove('active');
+                showAlert('Error al crear la cuenta. Por favor intenta nuevamente.', 'error');
+            }
+        });
+
+        // Sistema de alertas
+        function showAlert(message, type) {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert ${type}`;
+            alert.innerHTML = `
+                <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'check-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(alert);
+            
+            setTimeout(() => alert.classList.add('show'), 100);
+            
+            setTimeout(() => {
+                alert.classList.remove('show');
+                setTimeout(() => {
+                    if (container.contains(alert)) {
+                        container.removeChild(alert);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Crear partículas de celebración
+        function createCelebrationParticles() {
+            const container = document.getElementById('floatingParticles');
+            const particles = ['🎉', '🎊', '⭐', '💎', '🏆', '🎮', '🚀', '⚡'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'floating-particle';
+                    particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = (2 + Math.random() * 3) + 's';
+                    
+                    container.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        if (container.contains(particle)) {
+                            container.removeChild(particle);
+                        }
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+
+        // Efectos de hover en elementos interactivos
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

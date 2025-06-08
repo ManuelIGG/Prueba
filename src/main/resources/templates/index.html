@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DOWN TO THE TOP</title>
+    <link rel="stylesheet" href="/css/login-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para mensajes de error y estados */
+        .error-message {
+            background: linear-gradient(135deg, #ff3333, #cc0000);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ff6666;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
+            animation: shake 0.5s ease-in-out;
+            display: none;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+            color: #003311;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #66ffaa;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            display: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animación de entrada */
+        .login-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .login-container.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fondo animado -->
+    <div class="animated-background">
+        <div class="floating-particles"></div>
+    </div>
+
+    <!-- Partículas flotantes gaming -->
+    <div class="game-particles">
+        <div class="particle">🎮</div>
+        <div class="particle">🕹️</div>
+        <div class="particle">⚡</div>
+        <div class="particle">🎯</div>
+        <div class="particle">🎲</div>
+        <div class="particle">🎪</div>
+        <div class="particle">🎨</div>
+        <div class="particle">⭐</div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="login-container">
+        <!-- Logo y título -->
+        <div class="login-header">
+            <div class="logo-container">
+                <div class="logo-icon">🎮</div>
+                <h1 class="brand-title">DOWN TO THE TOP</h1>
+                <div class="logo-subtitle">GAMING PORTAL</div>
+            </div>
+        </div>
+
+        <!-- Formulario de login -->
+        <div class="login-form-container">
+            <div class="form-header">
+                <h2 class="form-title">INICIAR SESIÓN</h2>
+                <div class="neon-divider"></div>
+                <p class="form-subtitle">Accede a tu cuenta de gaming</p>
+            </div>
+
+            <!-- Mensajes de estado -->
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <form class="login-form" id="loginForm">
+                <!-- Email/Usuario -->
+                <div class="input-group">
+                    <div class="input-container">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="email" id="email" name="email" required>
+                        <label for="email" class="floating-label">Email</label>
+                        <div class="input-border"></div>
+                    </div>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="input-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" required>
+                        <label for="password" class="floating-label">Contraseña</label>
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="toggleIcon"></i>
+                        </button>
+                        <div class="input-border"></div>
+                    </div>
+                </div>
+
+                <!-- Opciones adicionales -->
+                <div class="form-options">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember" class="checkbox-label">
+                            <span class="checkmark"></span>
+                            Recordarme
+                        </label>
+                    </div>
+                    <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <!-- Botón de login -->
+                <button type="submit" class="login-btn" id="loginButton">
+                    <span class="btn-text">INICIAR SESIÓN</span>
+                    <span class="btn-icon"><i class="fas fa-rocket"></i></span>
+                    <div class="btn-glow"></div>
+                </button>
+
+                <!-- Separador -->
+                <div class="separator">
+                    <span class="separator-text">O CONTINÚA CON</span>
+                </div>
+
+                <!-- Login social -->
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        <span>Google</span>
+                    </button>
+                    <button type="button" class="social-btn discord">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord</span>
+                    </button>
+                    <button type="button" class="social-btn steam">
+                        <i class="fab fa-steam"></i>
+                        <span>Steam</span>
+                    </button>
+                </div>
+
+                <!-- Registro -->
+                <div class="register-section">
+                    <p class="register-text">¿No tienes una cuenta?</p>
+                    <a href="/register" class="register-btn">
+                        <span>CREAR CUENTA</span>
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer del login -->
+        <div class="login-footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link">Términos de Servicio</a>
+                <a href="#" class="footer-link">Política de Privacidad</a>
+                <a href="#" class="footer-link">Soporte</a>
+            </div>
+            <p class="copyright">© 2024 Down to the Top Gaming. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <!-- Efectos adicionales -->
+    <div class="glow-effects">
+        <div class="glow-orb glow-1"></div>
+        <div class="glow-orb glow-2"></div>
+        <div class="glow-orb glow-3"></div>
+    </div>
+
+    <script>
+        // ---------------------- CONFIGURACIÓN ----------------------
+        const apiUsuarios = "http://localhost:8113/api/usuarios";
+        let usuarioActual = null;
+
+        // ---------------------- VERIFICACIÓN DE SESIÓN ACTIVA ----------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            // Verificar si ya hay una sesión activa
+            const usuarioGuardado = sessionStorage.getItem('usuarioActual');
+            if (usuarioGuardado) {
+                usuarioActual = JSON.parse(usuarioGuardado);
+                redirigirSegunRol(usuarioActual.rol);
+                return;
+            }
+
+            // Inicializar efectos visuales
+            setTimeout(() => {
+                document.querySelector('.login-container').classList.add('animate-in');
+            }, 100);
+            
+            createFloatingParticles();
+            initializeFloatingLabels();
+        });
+
+        // ---------------------- FUNCIONES DE AUTENTICACIÓN ----------------------
+        function procesarLogin() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            
+            // Validaciones básicas
+            if (!email || !password) {
+                mostrarError('Por favor complete todos los campos');
+                return;
+            }
+
+            if (!validarEmail(email)) {
+                mostrarError('Por favor ingrese un email válido');
+                return;
+            }
+
+            mostrarCargando(true);
+            ocultarMensajes();
+            
+            // Obtener todos los usuarios para validar credenciales
+            fetch(apiUsuarios)
+                .then(res => {
+                    if (!res.ok) throw new Error(`Error del servidor: ${res.status}`);
+                    return res.json();
+                })
+                .then(usuarios => {
+                    // Buscar usuario con email y password coincidentes
+                    const usuario = usuarios.find(u => u.email === email && u.password === password);
+                    
+                    if (usuario) {
+                        if (usuario.estado !== 'activo') {
+                            mostrarError('Su cuenta está inactiva. Contacte al administrador.');
+                            return;
+                        }
+                        
+                        // Login exitoso
+                        usuarioActual = usuario;
+                        sessionStorage.setItem('usuarioActual', JSON.stringify(usuario));
+                        
+                        mostrarExito('¡Login exitoso! Redirigiendo...');
+                        
+                        setTimeout(() => {
+                            redirigirSegunRol(usuario.rol);
+                        }, 1500);
+                        
+                    } else {
+                        mostrarError('Email o contraseña incorrectos.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en login:', error);
+                    mostrarError('Error de conexión. Intente nuevamente.');
+                })
+                .finally(() => {
+                    mostrarCargando(false);
+                });
+        }
+
+        function redirigirSegunRol(rol) {
+            if (rol === 'admin') {
+                window.location.href = 'ViewAdm.html';
+            } else if (rol === 'usuario') {
+                window.location.href = 'ViewUser.html';
+            } else {
+                mostrarError('Rol de usuario no válido.');
+            }
+        }
+
+        // ---------------------- FUNCIONES DE UI ----------------------
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.className = 'fas fa-eye-slash';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.className = 'fas fa-eye';
+            }
+        }
+
+        function mostrarCargando(mostrar) {
+            const loginBtn = document.getElementById('loginButton');
+            const btnText = loginBtn.querySelector('.btn-text');
+            const btnIcon = loginBtn.querySelector('.btn-icon i');
+            
+            if (mostrar) {
+                loginBtn.disabled = true;
+                btnText.textContent = 'CONECTANDO...';
+                btnIcon.className = 'fas fa-spinner loading-spinner';
+            } else {
+                loginBtn.disabled = false;
+                btnText.textContent = 'INICIAR SESIÓN';
+                btnIcon.className = 'fas fa-rocket';
+            }
+        }
+
+        function mostrarError(mensaje) {
+            const errorDiv = document.getElementById("error-message");
+            errorDiv.textContent = mensaje;
+            errorDiv.style.display = "block";
+            
+            setTimeout(() => {
+                errorDiv.style.display = "none";
+            }, 5000);
+        }
+
+        function mostrarExito(mensaje) {
+            const successDiv = document.getElementById("success-message");
+            successDiv.textContent = mensaje;
+            successDiv.style.display = "block";
+            
+            setTimeout(() => {
+                successDiv.style.display = "none";
+            }, 3000);
+        }
+
+        function ocultarMensajes() {
+            document.getElementById("error-message").style.display = "none";
+            document.getElementById("success-message").style.display = "none";
+        }
+
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // ---------------------- EVENTOS DEL FORMULARIO ----------------------
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            procesarLogin();
+        });
+
+        // ---------------------- EFECTOS VISUALES ----------------------
+        function initializeFloatingLabels() {
+            document.querySelectorAll('.input-container input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.value === '') {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // Check if input has value on load
+                if (input.value !== '') {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+        }
+
+        function createFloatingParticles() {
+            const container = document.querySelector('.floating-particles');
+            const particles = ['🎮', '🕹️', '⚡', '🎯', '🎲', '⭐', '💎', '🎪'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'floating-particle';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 5000);
+            }, 800);
+        }
+
+        // ---------------------- MANEJO DE RECORDAR SESIÓN ----------------------
+        // Si el usuario selecciona "Recordarme", guardar en localStorage también
+        document.getElementById('remember').addEventListener('change', function() {
+            if (usuarioActual && this.checked) {
+                localStorage.setItem('usuarioRecordado', JSON.stringify(usuarioActual));
+            } else {
+                localStorage.removeItem('usuarioRecordado');
+            }
+        });
+
+        // Verificar si hay usuario recordado al cargar
+        window.addEventListener('load', function() {
+            const usuarioRecordado = localStorage.getItem('usuarioRecordado');
+            if (usuarioRecordado && !sessionStorage.getItem('usuarioActual')) {
+                const usuario = JSON.parse(usuarioRecordado);
+                document.getElementById('email').value = usuario.email;
+                document.getElementById('remember').checked = true;
+                
+                // Activar el label flotante
+                const emailContainer = document.getElementById('email').parentElement;
+                emailContainer.classList.add('focused');
+            }
+        });
+    </script>
+</body>
+</html>
